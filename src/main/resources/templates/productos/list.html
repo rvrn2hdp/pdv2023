@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Lista de Productos</title>
+</head>
+
+<body>
+    <div layout:fragment="contenido" class="container">
+        <div class="card my-4">
+            <div class="card-header">
+                <h5 th:text="${titulo}">Contenido</h5>
+            </div>
+            <!-- Tabla de Productos -->
+            <div class="card-body">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Imagen</th>
+                            <th>Descripcion</th>
+                            <th>Cod. Barras</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Categoria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${productos}">
+                            <td th:text="${p.id}"></td>
+                            <td style="max-width: 40px;">
+                                <img th:src="@{${p.linkImagen}}" alt="Imagen" width="100px" height="100px">
+                            </td>
+                            <td th:text="${p.descripcion}"></td>
+                            <td th:text="${p.codigoBarras}"></td>
+                            <td th:text="${p.precio}"></td>
+                            <td th:text="${p.stock}"></td>
+                            <td th:text="${p.categoria}"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Imagen</th>
+                            <th>Descripcion</th>
+                            <th>Cod. Barras</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Categoria</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="/productos/nuevo" class="btn btn-outline-primary float-end">
+                    Nuevo Producto
+                </a>
+            </div>
+        </div>
+
+        <!-- scripts de la plantilla-->
+        <script th:fragment="js"></script>
+</body>
+
+</html>
