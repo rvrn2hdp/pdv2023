@@ -16,7 +16,7 @@
             </div>
             <!-- Tabla de Productos -->
             <div class="card-body">
-                <table class="table table-striped table-hover table-bordered">
+                <table id="tablaProductos" class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -40,11 +40,16 @@
                             <td th:text="${p.stock}"></td>
                             <td th:text="${p.categoria}"></td>
                             <td>
-                                <a th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning">Editar</a>
+                                <a th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning"
+                                    title="Editar">
+                                    <i class="bx bxs-edit-alt bx-tada"></i>
+                                </a>
                             </td>
                             <td>
                                 <a th:href="@{/productos/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Estas seguro de eliminar el producto?')">Eliminar</a>
+                                    onclick="return confirm('¿Estas seguro de eliminar el producto?')" title="Borrar">
+                                    <i class="bx bxs-trash bx-flashing"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
@@ -68,9 +73,9 @@
                 </a>
             </div>
         </div>
-
-        <!-- scripts de la plantilla-->
-        <script th:fragment="js"></script>
+    </div>
+    <!-- scripts de la plantilla-->
+    <script th:fragment="js" th:src="@{/js/productos-list.js}"></script>
 </body>
 
 </html>
