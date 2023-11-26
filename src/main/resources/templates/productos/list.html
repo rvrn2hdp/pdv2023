@@ -22,10 +22,11 @@
                             <th>#</th>
                             <th>Imagen</th>
                             <th>Descripcion</th>
-                            <th>Cod. Barras</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Categoria</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,10 +36,16 @@
                                 <img th:src="@{${p.linkImagen}}" alt="Imagen" width="100px" height="100px">
                             </td>
                             <td th:text="${p.descripcion}"></td>
-                            <td th:text="${p.codigoBarras}"></td>
                             <td th:text="${p.precio}"></td>
                             <td th:text="${p.stock}"></td>
                             <td th:text="${p.categoria}"></td>
+                            <td>
+                                <a th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning">Editar</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/productos/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Estas seguro de eliminar el producto?')">Eliminar</a>
+                            </td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -46,10 +53,11 @@
                             <th>#</th>
                             <th>Imagen</th>
                             <th>Descripcion</th>
-                            <th>Cod. Barras</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>Categoria</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>

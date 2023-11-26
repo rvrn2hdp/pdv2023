@@ -2,6 +2,7 @@ package com.analistas.pdv.model.orm;
 
 import java.math.BigDecimal;
 
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.NumberFormat;
 
 import jakarta.persistence.Column;
@@ -17,10 +18,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
+@Getter
+@Setter
 @Table(name = "productos")
+@Where(clause = "activo = true")
 public class Producto {
 
     @Id
@@ -47,13 +53,17 @@ public class Producto {
     @Column(name = "activo", columnDefinition = "boolean default 1")
     private Boolean activo;
 
-    @NotNull(message = "La categoria es requerida...")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     private Categoria categoria;
 
-    @Override
-    public String toString() {
-        return this.getDescripcion();
+    /*@PrePersist
+    public void prePersist() {
+        this.setActivo(true);
+    }*/
+
+    public Producto() {
+
+        this.activo = true;
     }
 }
