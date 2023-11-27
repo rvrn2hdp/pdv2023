@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -53,6 +55,7 @@ public class Producto {
     @Column(name = "activo", columnDefinition = "boolean default 1")
     private Boolean activo;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     private Categoria categoria;

@@ -23,8 +23,7 @@ public class ProductoServiceImpl implements IProductoService {
     @Transactional(readOnly = true)
     @Override
     public List<Producto> buscarPor(String criterio) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not supported yet.");
+        return productoRepository.buscarPor(criterio);
     }
 
     @Override
