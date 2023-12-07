@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/productos")
@@ -66,16 +67,24 @@ public class ProductoController {
     public String guardar(@Valid Producto producto,
             BindingResult result,
             @RequestParam("cat") Long idCat,
-            Model model, SessionStatus status) {
+            Model model, SessionStatus status,
+            RedirectAttributes redirect) {
 
+        // Validación de los datos:
         if (result.hasErrors()) {
 
             model.addAttribute("titulo", "Error en el formulario.");
+            model.addAttribute("danger", "Corrija los errores...");
+
             return "productos/form";
         }
 
+        String mensaje = producto.getId() != null ? "Se ha actualizado el producto " + producto.getDescripcion() + "."
+                : "Se ha creado el producto " + producto.getDescripcion() + ".";
+
         producto.setCategoria(this.categoriaService.buscarPorId(idCat));
         productoService.guardar(producto);
+        redirect.addFlashAttribute(producto.getId() == null ? "success" : "warning", mensaje);
         status.setComplete();
 
         return "redirect:/productos/listado";
@@ -83,13 +92,16 @@ public class ProductoController {
 
     // Eliminación Lógica de un producto:
     @GetMapping("/borrar/{id}")
-    public String deshabilitarOrHabilitarProducto(@PathVariable("id") Long id, Model model) {
+    public String deshabilitarOrHabilitarProducto(@PathVariable("id") Long id, Model model,
+            RedirectAttributes redirect) {
 
         // this.productoService.buscarPorId(id).setActivo(false);
         Producto producto = productoService.buscarPorId(id);
         producto.setActivo(false);
 
         this.productoService.guardar(producto);
+
+        redirect.addFlashAttribute("danger", "Se ha deshabilitado el producto " + producto.getDescripcion() + ".");
 
         return "redirect:/productos/listado";
     }

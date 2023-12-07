@@ -21,6 +21,9 @@
     <!-- JQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/pdv.css}">
+
 </head>
 
 <body>
@@ -62,6 +65,33 @@
         </div>
     </nav>
 
+    <!-- Mensajes  -->
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+        <i class="bx bxs-info-circle bx-tada"></i>
+        &nbsp;
+        <span th:text="${success}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${warning != null}">
+        <i class="bx bxs-message-dots bx-tada"></i>
+        &nbsp;
+        <span th:text="${warning}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${danger != null}">
+        <i class="bx bxs-trash bx-tada"></i>
+        &nbsp;
+        <span th:text="${danger}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert" th:if="${info != null}">
+        <i class="bx bxs-info-circle bx-tada"></i>
+        &nbsp;
+        <span th:text="${info}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
+
     <!-- Contenido -->
     <div layout:fragment="contenido">
         ...
@@ -84,6 +114,17 @@
 
     <!-- Sección que contendrá los scripts de las paginas hijas-->
     <script th:replace="::js"></script>
+
+    <script>
+        setInterval("cerrar()", 5000);
+
+        // Close the alert by sliding it up and hiding it after a delay.
+        const cerrar = () => {
+            $('.alert').delay(500).slideUp(500, () => {
+                $(this).hide();
+            });
+        }
+    </script>
 </body>
 
 </html>

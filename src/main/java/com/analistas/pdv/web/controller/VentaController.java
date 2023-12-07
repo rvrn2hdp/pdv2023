@@ -40,8 +40,17 @@ public class VentaController {
         return "ventas/form";
     }
 
+    
+    /**
+     * Retrieves a list of products based on the specified search criteria.
+     *
+     * @param  criterio  the search criteria
+     * @return           a list of products matching the search criteria
+     */
     @GetMapping(value = "/buscar-productos/{criterio}", produces = "application/json")
     public @ResponseBody List<Producto> buscarProductos(@PathVariable("criterio") String criterio){
+
+        
 
         return productoService.buscarPor(criterio);
     }

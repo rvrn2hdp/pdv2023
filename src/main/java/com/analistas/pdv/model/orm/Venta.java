@@ -45,7 +45,7 @@ public class Venta {
     private Usuario usuario;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_venta", referencedColumnName = "id")
+    @JoinColumn(name = "id_venta")
     private List<LineaVenta> lineas;
 
     @Column(name = "activo", columnDefinition = "boolean default 1")

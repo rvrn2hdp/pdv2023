@@ -19,25 +19,25 @@
                     <div class="form">
                         <label for"cod-bar" class="form-label">Codigo de Barra</label>
                         <input type="text" class="form-control" id="cod-bar" th:field="*{codigoBarras}" maxlength="13"
-                            th:errorclass="form-control alert-danger">
+                            th:errorclass="'form-control alert-danger'">
                     </div>
                     <div class="form">
                         <label for"descri" class="form-label">Descripcion</label>
                         <input type="text" class="form-control" id="descri" th:field="*{descripcion}" maxlength="65"
-                            th:errorclass="form-control alert-danger">
-                        <small class="form-label text danger" th:errors="*{descripcion}"></small>
+                            th:errorclass="'form-control alert-danger'">
+                        <small class="form-label text-danger" th:errors="*{descripcion}"></small>
                     </div>
                     <div class="form">
                         <label for"precio" class="form-label">Precio</label>
                         <input type="text" class="form-control money" id="precio" th:field="*{precio}"
-                            th:errorclass="form-control alert-danger">
-                        <small class="form-label text danger" th:errors="*{precio}"></small>
+                            th:errorclass="'form-control alert-danger'">
+                        <small class="form-label text-danger" th:errors="*{precio}"></small>
                     </div>
                     <div class="form">
                         <label for"stock" class="form-label">Cantidad</label>
                         <input type="number" class="form-control" id="stock" th:field="*{stock}"
-                            th:errorclass="form-control alert-danger">
-                        <small class="form-label text danger" th:errors="*{stock}"></small>
+                            th:errorclass="'form-control alert-danger'">
+                        <small class="form-label text-danger" th:errors="*{stock}"></small>
                     </div>
 
                     <div class="form">
@@ -45,7 +45,7 @@
                         <select name="cat" class="form-select" id="cat">
                             <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c}"></option>
                         </select>
-                        <!--<small class="form-label text danger" th:errors="*{categoria}"></small> -->
+                        <!--<small class="form-label text-danger" th:errors="*{categoria}"></small> -->
                     </div>
 
                     <div class="form">
