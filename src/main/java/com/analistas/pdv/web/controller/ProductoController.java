@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,7 @@ public class ProductoController {
     }
 
     @GetMapping("/nuevo")
+    @Secured({"ROLE_ADMIN"})
     public String nuevo(Model model) {
 
         model.addAttribute("titulo", "Nuevo producto");
@@ -53,6 +55,7 @@ public class ProductoController {
     }
 
     @GetMapping("/editar/{id}")
+    @Secured({"ROLE_ADMIN"})
     public String editar(@PathVariable("id") Long id, Model model) {
 
         Producto producto = this.productoService.buscarPorId(id);
@@ -64,6 +67,7 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
+    @Secured({"ROLE_ADMIN"})
     public String guardar(@Valid Producto producto,
             BindingResult result,
             @RequestParam("cat") Long idCat,
@@ -92,6 +96,7 @@ public class ProductoController {
 
     // Eliminación Lógica de un producto:
     @GetMapping("/borrar/{id}")
+    @Secured({"ROLE_ADMIN"})
     public String deshabilitarOrHabilitarProducto(@PathVariable("id") Long id, Model model,
             RedirectAttributes redirect) {
 

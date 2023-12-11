@@ -1,4 +1,12 @@
+/* Roles */
 
+INSERT INTO permisos (nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO permisos (nombre) VALUES ('ROLE_USER');
+
+/* Users */
+
+INSERT INTO usuarios (activo, nombre, clave, id_permiso) VALUES (1,'admin', 'admin', 1);
+INSERT INTO usuarios (activo, nombre, clave, id_permiso) VALUES (1,'user', 'user', 2);
 
 /* Data for the categorias table */
 

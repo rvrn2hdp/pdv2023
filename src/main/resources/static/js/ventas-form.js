@@ -1,3 +1,6 @@
+let stock = {};
+let stocks = [];
+
 $(document).ready(function () {
 
     $("#buscar_productos").autocomplete({
@@ -11,6 +14,14 @@ $(document).ready(function () {
                 },
                 success: (data) => {
                     response($.map(data, (item) => {
+
+                        stock = {
+                            id: item.id,
+                            stock: item.stock
+                        }
+
+                        stocks.push(stock);
+
                         return {
                             value: item.id,
                             label: `${item.descripcion} - ${item.precio}`,
@@ -62,8 +73,21 @@ const LineasUtil = {
 
     // Calcular el subtotal de una linea:
     calcularSubtotal: function (id, precio, cantidad) {
-        $("#subtotal_" + id).html(parseFloat(precio) * parseInt(cantidad));
-        this.calcularTotal();
+
+        let stk = stocks.find(element => element.id === id);
+        if (stk.stock < cantidad) {
+            //alert("No hay suficiente stock");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No hay suficiente stock'
+            });
+            $(`#cantidad_${id}`).val(stk.stock); // Asignar stock actual como cantidad...
+            //this.calcularSubtotal(id, precio, stk.stock);
+        } else {
+            $("#subtotal_" + id).html(parseFloat(precio) * parseInt(cantidad));
+            this.calcularTotal();
+        }
     },
 
     // Determine if a line has already been added

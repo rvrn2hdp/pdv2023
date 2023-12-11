@@ -43,22 +43,47 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="/">
+                            Dashboard
+                        </a>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Acciones
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/ventas/listado">Ventas</a></li>
-                            <li><a class="dropdown-item" href="/productos/listado">Productos</a></li>
+                            <li>
+                                <a class="dropdown-item" href="/ventas/listado">Ventas</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/productos/listado">Productos</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Clientes</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#">Clientes</a>
+                            </li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link disabled" href="#" aria-disabled="true">Usuario</a></li>
+                    <li class="nav-item dropdown">
+                        <a id="user-link" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false" role="button">
+                            <span>Hola </span>
+                            <span sec:authentication="name"></span>
+                            <span sec:authentication="principal.authorities"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-link">
+                            <li>
+                                <a class="dropdown-item" href="/profile">Mi Perfil</a>
+                                <a class="dropdown-item" href="#">Configuraciones</a>
+                                <span class="dropdown-divider"></span>
+                                <form id="logoutForm" action="/logout">
+                                    <a class="dropdown-item" href="#" onclick="$('#logoutForm').submit();">Cerrar Sesión</a>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     </li>
                 </ul>
             </div>
@@ -90,7 +115,7 @@
         <span th:text="${info}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    
+
 
     <!-- Contenido -->
     <div layout:fragment="contenido">
@@ -111,6 +136,9 @@
 
     <!-- JQuery UI JS -->
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <!-- SweetAlert 2.11.7 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Sección que contendrá los scripts de las paginas hijas-->
     <script th:replace="::js"></script>

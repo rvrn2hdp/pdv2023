@@ -40,13 +40,13 @@
                             <td th:text="${p.stock}"></td>
                             <td th:text="${p.categoria}"></td>
                             <td>
-                                <a th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning"
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/productos/editar/} + ${p.id}" class="btn btn-sm btn-warning"
                                     title="Editar">
                                     <i class="bx bxs-edit-alt bx-tada"></i>
                                 </a>
                             </td>
                             <td>
-                                <a th:href="@{/productos/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/productos/borrar/} + ${p.id}" class="btn btn-sm btn-danger"
                                     onclick="return confirm('¿Estas seguro de eliminar el producto?')" title="Borrar">
                                     <i class="bx bxs-trash bx-flashing"></i>
                                 </a>
@@ -68,7 +68,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a href="/productos/nuevo" class="btn btn-outline-primary float-end">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/productos/nuevo" class="btn btn-outline-primary float-end">
                     Nuevo Producto
                 </a>
             </div>
